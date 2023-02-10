@@ -67,6 +67,7 @@ def gameLoop():
             dis.fill(blue)
             message("You Lost! Press C-Play Again or Q-Quit", red)
             Your_score(Length_of_snake - 1)
+            Your_level(level)
             pygame.display.update()
  
             for event in pygame.event.get():
@@ -80,6 +81,7 @@ def gameLoop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
+                game_close = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
@@ -124,6 +126,7 @@ def gameLoop():
             if Length_of_snake - 1 == level_up_score:
                 level += 1
                 level_up_score += 10
+                snake_speed += 50
 
         clock.tick(snake_speed)
 
