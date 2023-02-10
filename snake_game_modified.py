@@ -56,7 +56,8 @@ def gameLoop():
     Length_of_snake = 1
 
     level = 1
-    
+    level_up_score = 10
+ 
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
     foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
  
@@ -120,6 +121,9 @@ def gameLoop():
             foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
             Length_of_snake += 1
 
+            if Length_of_snake - 1 == level_up_score:
+                level += 1
+                level_up_score += 10
 
         clock.tick(snake_speed)
 
