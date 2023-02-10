@@ -43,6 +43,9 @@ def message(msg, color):
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
  
 def gameLoop():
+    
+    global snake_speed
+    
     game_over = False
     game_close = False
  
@@ -98,6 +101,7 @@ def gameLoop():
                     
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
+
         x1 += x1_change
         y1 += y1_change
         dis.fill(blue)
