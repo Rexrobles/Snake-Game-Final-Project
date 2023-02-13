@@ -68,17 +68,23 @@ def gameLoop():
  
         while game_close == True:
             dis.fill(blue)
-            message("You Lost! Press C-Play Again or Q-Quit", red)
+            message("You Lost! Press P-Play Again or Q-Quit", red)
             Your_score(Length_of_snake - 1)
             Your_level(level)
             pygame.display.update()
+            
+            if game_close:
+                snake_speed = 15
+                level = 1
+                level_up_score = 10
+                Length_of_snake = 1
  
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
                         game_over = True
                         game_close = False
-                    if event.key == pygame.K_c:
+                    if event.key == pygame.K_p:
                         gameLoop()
                         
         for event in pygame.event.get():
