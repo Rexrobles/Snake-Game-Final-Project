@@ -46,9 +46,9 @@ def our_snake(snake_block, snake_list, x1_change, y1_change):
             elif x1_change == -snake_block:
                 snake_img_rotate = pygame.transform.rotate(snake_img, 90) # rotate clockwise
             elif y1_change == snake_block:
-                snake_img_rotate = pygame.transform.rotate(snake_img, 0) # no rotation
+                snake_img_rotate = pygame.transform.rotate(snake_img, 180) # no rotation
             elif y1_change == -snake_block:
-                snake_img_rotate = pygame.transform.rotate(snake_img, 180) # upside down
+                snake_img_rotate = pygame.transform.rotate(snake_img, 0) # upside down
             dis.blit(snake_img_rotate, [x[0], x[1], snake_block, snake_block])
         else:
             pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
