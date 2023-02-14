@@ -18,6 +18,8 @@ dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Snake Game modified by REX')
 
 clock = pygame.time.Clock()
+
+apple_img = pygame.image.load("apple.png")
  
 snake_block = 10
 snake_speed = 15
@@ -36,7 +38,7 @@ def Your_level(level):
  
 def our_snake(snake_block, snake_list):
     for x in snake_list:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+        pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
  
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
@@ -67,7 +69,7 @@ def gameLoop():
     while not game_over:
  
         while game_close == True:
-            dis.fill(blue)
+            dis.fill(black)
             message("You Lost! Press P-Play Again or Q-Quit", red)
             Your_score(Length_of_snake - 1)
             Your_level(level)
@@ -110,8 +112,8 @@ def gameLoop():
 
         x1 += x1_change
         y1 += y1_change
-        dis.fill(blue)
-        pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block])
+        dis.fill(black)
+        dis.blit(apple_img, [foodx, foody, snake_block, snake_block])
         snake_Head = []
         snake_Head.append(x1)
         snake_Head.append(y1)
