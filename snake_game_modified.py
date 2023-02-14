@@ -37,9 +37,22 @@ def Your_level(level):
     value = level_font.render("Level: " + str(level), True, white)
     dis.blit(value, [dis_width - 125, 0])
  
-def our_snake(snake_block, snake_list):
+def our_snake(snake_block, snake_list, x1_change, y1_change):
+    snake_img_rotate = snake_img # initialize snake_img_rotate to snake_img
     for x in snake_list:
-        dis.blit(snake_img, [x[0], x[1], snake_block, snake_block])
+        if x == snake_list[-1]: # the head of the snake
+            if x1_change == snake_block:
+                snake_img_rotate = pygame.transform.rotate(snake_img, 270) # rotate counterclockwise
+            elif x1_change == -snake_block:
+                snake_img_rotate = pygame.transform.rotate(snake_img, 90) # rotate clockwise
+            elif y1_change == snake_block:
+                snake_img_rotate = pygame.transform.rotate(snake_img, 0) # no rotation
+            elif y1_change == -snake_block:
+                snake_img_rotate = pygame.transform.rotate(snake_img, 180) # upside down
+            dis.blit(snake_img_rotate, [x[0], x[1], snake_block, snake_block])
+        else:
+            pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
+
  
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
@@ -126,7 +139,7 @@ def gameLoop():
             if x == snake_Head:
                 game_close = True
 
-        our_snake(snake_block, snake_List)
+        our_snake(snake_block, snake_List, x1_change, y1_change)
         Your_score(Length_of_snake - 1)
         Your_level(level)
         pygame.display.update()
