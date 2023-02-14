@@ -19,6 +19,7 @@ pygame.display.set_caption('Snake Game modified by REX')
 
 clock = pygame.time.Clock()
 
+snake_img = pygame.image.load('snake2.png')
 apple_img = pygame.image.load("apple.png")
  
 snake_block = 10
@@ -38,7 +39,7 @@ def Your_level(level):
  
 def our_snake(snake_block, snake_list):
     for x in snake_list:
-        pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
+        dis.blit(snake_img, [x[0], x[1], snake_block, snake_block])
  
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
