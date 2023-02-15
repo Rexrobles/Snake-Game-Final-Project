@@ -22,7 +22,8 @@ clock = pygame.time.Clock()
 snake_img = pygame.image.load('snake2.png')
 apple_img = pygame.image.load("apple.png")
 tail_img = pygame.image.load('tail1.png')
- 
+apple_img_rect = apple_img.get_rect()
+
 snake_block = 10
 snake_speed = 15
  
@@ -38,10 +39,10 @@ def Your_level(level):
     value = level_font.render("Level: " + str(level), True, white)
     dis.blit(value, [dis_width - 125, 0])
  
-def our_snake(snake_block, snake_list, x1_change, y1_change):
+def our_snake(snake_block, snake_list, x1_change, y1_change, tail_img):
     snake_img_rotate = snake_img # initialize snake_img_rotate to snake_img
-    for x in snake_list:
-        if x == snake_list[-1]: # the head of the snake
+    for i, x in enumerate(snake_list):
+        if i == len(snake_list) - 1: # the head of the snake
             if x1_change == snake_block:
                 snake_img_rotate = pygame.transform.rotate(snake_img, 270) # rotate counterclockwise
             elif x1_change == -snake_block:
@@ -51,8 +52,11 @@ def our_snake(snake_block, snake_list, x1_change, y1_change):
             elif y1_change == -snake_block:
                 snake_img_rotate = pygame.transform.rotate(snake_img, 0) # upside down
             dis.blit(snake_img_rotate, [x[0], x[1], snake_block, snake_block])
+        elif i == 0: # the tail of the snake
+            tail_rect = pygame.Rect(x[0], x[1], snake_block, snake_block)
+            dis.blit(tail_img, tail_rect)
         else:
-            dis.blit(tail_img, [x[0], x[1], snake_block, snake_block])
+            pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
 
  
 def message(msg, color):
@@ -140,7 +144,7 @@ def gameLoop():
             if x == snake_Head:
                 game_close = True
 
-        our_snake(snake_block, snake_List, x1_change, y1_change)
+        our_snake(snake_block, snake_List, x1_change, y1_change, tail_img)
         Your_score(Length_of_snake - 1)
         Your_level(level)
         pygame.display.update()
