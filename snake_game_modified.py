@@ -21,6 +21,7 @@ clock = pygame.time.Clock()
 
 snake_img = pygame.image.load('snake2.png')
 apple_img = pygame.image.load("apple.png")
+tail_img = pygame.image.load('tail1.png')
  
 snake_block = 10
 snake_speed = 15
