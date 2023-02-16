@@ -30,6 +30,8 @@ snake_speed = 15
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 25)
 level_font = pygame.font.SysFont("comicsansms", 25)
+scores_font = pygame.font.SysFont("comicsansms", 20)
+
  
 def Your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
@@ -58,7 +60,28 @@ def our_snake(snake_block, snake_list, x1_change, y1_change, tail_img):
         else:
             pygame.draw.rect(dis, blue, [x[0], x[1], snake_block, snake_block])
 
- 
+def write_score(score):
+    with open('scores.txt', 'a') as file:
+        file.write(str(score) + '\n')
+    
+def read_scores():
+    with open('scores.txt') as file:
+        scores = file.readlines()
+        scores = [int(score.strip()) for score in scores]
+        scores.sort(reverse=True)
+        return scores[:10]
+    
+def display_scores(scores):
+    y = 50
+    text = score_font.render("Top Scores", True, white)
+    dis.blit(text, [dis_width - 600, y])
+    y += 30
+    for score in scores:
+        text = score_font.render(str(score), True, white)
+        dis.blit(text, [dis_width - 550, y])
+        y += 30
+
+                
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
@@ -91,6 +114,9 @@ def gameLoop():
             dis.fill(black)
             message("You Lost! Press P-Play Again or Q-Quit", red)
             Your_score(Length_of_snake - 1)
+            write_score(Length_of_snake - 1)
+            scores = read_scores()
+            display_scores(scores)
             Your_level(level)
             pygame.display.update()
             
